@@ -100,7 +100,7 @@ LIMIT 5;
 | 2020-07-30 | 673             | 673            |
 | 2020-07-29 | 679             | 679            |
 
--- department_employee table
+- department_employee table
 
 ```sql
 SELECT 
@@ -122,4 +122,55 @@ LIMIT 5;
 | 2020-07-31 | 28              | 28             |
 | 2020-07-30 | 32              | 32             |
 | 2020-07-29 | 27              | 27             |
+
+As, we can see we got similar number of unique ```employee_id``` present in all the SCD tables when it comes to current employees. Let's begin the joining based on the primary_key and foreign_key as seen in the data exploration part.
+
+```sql
+DROP TABLE IF EXISTS current_join_table;
+CREATE TEMP TABLE current_join_table AS
+SELECT
+  employee.id,
+  employee.birth_date,
+  employee.first_name,
+  employee.last_name,
+  employee.gender,
+  employee.hire_date,
+  title.title,
+  title.from_date AS title_from_date,
+  title.to_date AS title_to_date,
+  salary.amount,
+  salary.from_date AS salary_from_date,
+  salary.to_date AS salary_to_date,
+  department_employee.department_id,
+  department_employee.from_date AS dept_from_date,
+  department_employee.to_date AS dept_to_date,
+  department.dept_name
+FROM mv_employees.employee
+INNER JOIN mv_employees.title
+  ON employee.id = title.employee_id
+INNER JOIN mv_employees.salary
+  ON employee.id = salary.employee_id
+INNER JOIN mv_employees.department_employee
+  ON employee.id = department_employee.employee_id
+INNER JOIN mv_employees.department
+  ON department_employee.department_id = department.id
+-- Filter out the records only for the current employees
+WHERE salary.to_date = '9999-01-01'
+  AND title.to_date = '9999-01-01'
+  AND department_employee.to_date = '9999-01-01';
+```
+
+Let's now take a look at the total number of values we have in our ```current_join_table```.
+
+```sql
+SELECT
+  COUNT(*) AS row_count
+FROM current_join_table;
+```
+
+*Output:*
+
+| row_count |
+|-----------|
+| 240124    |
 
