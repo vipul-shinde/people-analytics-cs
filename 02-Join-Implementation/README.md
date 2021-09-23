@@ -123,6 +123,8 @@ LIMIT 5;
 | 2020-07-30 | 32              | 32             |
 | 2020-07-29 | 27              | 27             |
 
+## 2.1 Current Data Join
+
 As, we can see we got similar number of unique ```employee_id``` present in all the SCD tables when it comes to current employees. Let's begin the joining based on the primary_key and foreign_key as seen in the data exploration part.
 
 ```sql
@@ -174,3 +176,92 @@ FROM current_join_table;
 |-----------|
 | 240124    |
 
+## 2.2 Historic Data Join
+
+```sql
+DROP TABLE IF EXISTS historic_join_table;
+CREATE TEMP TABLE historic_join_table AS (
+WITH join_data AS (
+SELECT
+  employee.id AS employee_id,
+  employee.birth_date,
+  CONCAT_WS(' ', employee.first_name, employee.last_name) AS employee_name,
+  employee.gender,
+  employee.hire_date,
+  title.title,
+  salary.amount AS salary,
+  department.dept_name AS department,
+  CONCAT_WS(' ', manager.first_name, manager.last_name) AS manager,
+  GREATEST(
+    title.from_date,
+    salary.from_date,
+    department_employee.from_date,
+    department_manager.from_date
+  ) AS effective_date,
+  LEAST(
+    title.to_date,
+    salary.to_date,
+    department_employee.to_date,
+    department_manager.to_date    
+  ) AS expiry_date
+FROM mv_employees.employee
+INNER JOIN mv_employees.title
+  ON employee.id = title.employee_id
+INNER JOIN mv_employees.salary
+  ON employee.id = salary.employee_id
+INNER JOIN mv_employees.department_employee
+  ON employee.id = department_employee.employee_id
+INNER JOIN mv_employees.department
+  ON department_employee.department_id = department.id
+INNER JOIN mv_employees.department_manager
+  ON department.id = department_manager.department_id
+-- joining again to get the manager name from the employee table
+INNER JOIN mv_employees.employee AS manager
+  ON department_manager.employee_id = manager.id
+)
+
+SELECT
+  employee_id,
+  birth_date,
+  employee_name,
+  gender,
+  hire_date,
+  title,
+  LAG(title) OVER w AS previous_title,
+  salary,
+  LAG(salary) OVER w AS previous_salary,
+  department,
+  LAG(department) OVER w AS previous_department,
+  manager,
+  LAG(manager) OVER w AS previous_manager,
+  effective_date,
+  expiry_date
+FROM join_data
+WHERE effective_date <= expiry_date
+WINDOW
+  w AS (PARTITION BY employee_id ORDER BY effective_date)
+);
+```
+
+Let's check sample historic data for one of the employees when ```employee_id = 11669```
+
+```sql
+SELECT *
+FROM historic_join_table
+WHERE employee_id = 11669;
+```
+
+*Output:*
+
+| employee_id | birth_date               | employee_name | gender | hire_date                | title           | previous_title | salary | previous_salary | department       | previous_department | manager         | previous_manager | effective_date           | expiry_date              |
+|-------------|--------------------------|---------------|--------|--------------------------|-----------------|----------------|--------|-----------------|------------------|---------------------|-----------------|------------------|--------------------------|--------------------------|
+| 11669       | 1975-03-03T00:00:00.000Z | Leah Anguita  | M      | 2004-04-07T00:00:00.000Z | Engineer        | null           | 41183  | null            | Production       | null                | Oscar Ghazalie  | null             | 2015-05-12T00:00:00.000Z | 2016-05-12T00:00:00.000Z |
+| 11669       | 1975-03-03T00:00:00.000Z | Leah Anguita  | M      | 2004-04-07T00:00:00.000Z | Engineer        | Engineer       | 43577  | 41183           | Production       | Production          | Oscar Ghazalie  | Oscar Ghazalie   | 2016-05-12T00:00:00.000Z | 2017-05-12T00:00:00.000Z |
+| 11669       | 1975-03-03T00:00:00.000Z | Leah Anguita  | M      | 2004-04-07T00:00:00.000Z | Engineer        | Engineer       | 43930  | 43577           | Production       | Production          | Oscar Ghazalie  | Oscar Ghazalie   | 2017-05-12T00:00:00.000Z | 2018-05-11T00:00:00.000Z |
+| 11669       | 1975-03-03T00:00:00.000Z | Leah Anguita  | M      | 2004-04-07T00:00:00.000Z | Engineer        | Engineer       | 43681  | 43930           | Production       | Production          | Oscar Ghazalie  | Oscar Ghazalie   | 2018-05-11T00:00:00.000Z | 2019-05-11T00:00:00.000Z |
+| 11669       | 1975-03-03T00:00:00.000Z | Leah Anguita  | M      | 2004-04-07T00:00:00.000Z | Engineer        | Engineer       | 47046  | 43681           | Production       | Production          | Oscar Ghazalie  | Oscar Ghazalie   | 2019-05-11T00:00:00.000Z | 2019-06-12T00:00:00.000Z |
+| 11669       | 1975-03-03T00:00:00.000Z | Leah Anguita  | M      | 2004-04-07T00:00:00.000Z | Engineer        | Engineer       | 47046  | 47046           | Customer Service | Production          | Yuchang Weedman | Oscar Ghazalie   | 2019-06-12T00:00:00.000Z | 2020-05-11T00:00:00.000Z |
+| 11669       | 1975-03-03T00:00:00.000Z | Leah Anguita  | M      | 2004-04-07T00:00:00.000Z | Engineer        | Engineer       | 47373  | 47046           | Customer Service | Customer Service    | Yuchang Weedman | Yuchang Weedman  | 2020-05-11T00:00:00.000Z | 2020-05-12T00:00:00.000Z |
+| 11669       | 1975-03-03T00:00:00.000Z | Leah Anguita  | M      | 2004-04-07T00:00:00.000Z | Senior Engineer | Engineer       | 47373  | 47373           | Customer Service | Customer Service    | Yuchang Weedman | Yuchang Weedman  | 2020-05-12T00:00:00.000Z | 9999-01-01T00:00:00.000Z |
+
+Now, lets move to the problem solving part to fullfil all the requirements required by the People Analytics team for our two dashboards.
