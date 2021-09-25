@@ -183,8 +183,6 @@ Lastly, there are a few questions asked by the HR Analytica team and they can be
 
 ### 2. Employee Churn
 
-HR Analytica want to perform an employee churn analysis and wants you to help them answer the following questions using your generated views:
-
 <details>
 <summary>Click to view questions</summary>
 <br>
@@ -204,8 +202,6 @@ HR Analytica want to perform an employee churn analysis and wants you to help th
 </details>
 
 ### 3. Management Analysis
-
-The HR Analytica team also want to perform a management analysis and need answers for these questions:
 
 <details>
 <summary>Click to view questions</summary>
