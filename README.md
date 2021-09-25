@@ -158,4 +158,83 @@ After implementing the joins, we begin solving for the problems as required by t
 
 [![forthebadge](images/badges/solution-final-solution.svg)](https://github.com/vipul-shinde/people-analytics-cs/tree/main/03-Final-Solution)
 
+## 🚀 Business Questions <a name = "business-questions"></a>
 
+Lastly, there are a few questions asked by the HR Analytica team and they can be divided into 3 different sections based on the analytical focus areas. They are as follows.
+
+### 1. Current Analysis
+
+<details>
+<summary>Click to view questions</summary>
+<br>
+
+1. What is the full name of the employee with the highest salary?
+2. How many current employees have the equal longest time in their current positions?
+3. Which department has the least number of current employees?
+4. What is the largest difference between minimimum and maximum salary values for all current employees?
+5. How many male employees are above the average salary value for the Production department?
+6. Which title has the highest average salary for male employees?
+7. Which department has the highest average salary for female employees?
+8. Which department has the most female employees?
+9. What is the gender ratio in the department which has the highest average male salary and what is the average male salary value for that department?
+10. HR Analytica want to change the average salary increase percentage value to 2 decimal places - what will the new value be for males for the company level dashboard?
+
+</details>
+
+### 2. Employee Churn
+
+HR Analytica want to perform an employee churn analysis and wants you to help them answer the following questions using your generated views:
+
+<details>
+<summary>Click to view questions</summary>
+<br>
+
+1. How many employees have left the company?
+2. What percentage of churn employees were male?
+3. Which title had the most churn?
+4. Which department had the most churn?
+5. Which year had the most churn?
+6. What was the average salary for each employee who has left the company?
+7. What was the median total company tenure for each churn employee just before they left?
+8. On average, how many different titles did each churn employee hold?
+9. What was the average last pay increase for churn employees?
+10. What proportion of churn employees had a pay decrease event in their last 5 events?
+11. How many current employees have the equal longest overall time in their current positions (not in years)?
+
+</details>
+
+### 3. Management Analysis
+
+The HR Analytica team also want to perform a management analysis and need answers for these questions:
+
+<details>
+<summary>Click to view questions</summary>
+<br>
+
+1. How many managers are there currently in the company?
+2. How many employees have ever been a manager?
+3. On average - how long did it take for an employee to first become a manager from their the date they were originally hired?
+4. What was the most common titles that managers had just before before they became a manager?
+5. On average - how much more do current managers make on average compared to all other employees?
+
+</details>
+
+### Click to view 👇:
+
+[![forthebadge](images/badges/solution-business-questions.svg)](https://github.com/vipul-shinde/people-analytics-cs/tree/main/04-Solving-Business-Questions)
+
+## 🎨 Contributing <a name = "contributing"></a>
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 🌟 Support
+
+Please hit the ⭐button if you like this project. 😄
+
+# Thank you!
