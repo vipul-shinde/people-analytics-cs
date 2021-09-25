@@ -1135,6 +1135,8 @@ FROM mv_employees.historic_employee_records
 WHERE event_order <= 5;
 ```
 
+</details>
+
 ## 3.5 Reduce the final output further
 
 We can reduce the final output of ```employee_deep_dive``` into sections based on the employee dashboard required by the HR Analytica.
