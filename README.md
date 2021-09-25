@@ -150,5 +150,12 @@ Next, we start implementing the table joins which will then help us to start the
 
 [![forthebadge](images/badges/solution-join-implementation.svg)](https://github.com/vipul-shinde/people-analytics-cs/tree/main/02-Join-Implementation)
 
-## 💥 Problem Solving <a name = "problem-solving"></a>
+## ✨ Final Solution <a name = "final-solution"></a>
+
+After implementing the joins, we begin solving for the problems as required by the HR Analytica team. Our solution is divided into two parts viz. ```1. Current Employee Snapshot``` where we have created data assets that can power the first dashboard and ```2. Historic Employee Snapshot``` which will power the second dashboard and contain all the details of the employees at individual level.
+
+### Click to view 👇:
+
+[![forthebadge](images/badges/solution-final-solution.svg)](https://github.com/vipul-shinde/people-analytics-cs/tree/main/03-Final-Solution)
+
 
