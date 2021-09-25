@@ -128,5 +128,27 @@ We start by doing the data exploration. There are 6 tables in total viz. ```empl
     <br> 
 </p>
 
+Additionally - we’ve been notified about the presence of date issues with our datasets where there were data-entry issues related to all DATE related fields. I have fixed that in this section.
+
+### Click to view 👇:
+
 [![forthebadge](images/badges/solution-data-exploration.svg)](https://github.com/vipul-shinde/people-analytics-cs/tree/main/01-Data-Exploration)
+
+## 🧲 Join Implementation <a name = "join-implementation"></a>
+
+Next, we start implementing the table joins which will then help us to start the problem solving. From the analysis section, we have come to conclusion to the following join table sequence.
+
+| Join Journey Part | Start               |  End                      |  Foreign Key         |
+|-------------------|---------------------|---------------------------|----------------------|
+| Part 1            | ```employee```      | ```title```               | ```employee_id```    |
+| Part 2            | ```employee```      | ```salary```              | ```employee_id```    |
+| Part 3            | ```employee```      | ```department_employee``` | ```employee_id```    |
+| Part 4            | ```department```    | ```department_employee``` | ```department_id```  |
+| Part 5            | ```department```    | ```department_manager```  | ```department_id```  |
+
+### Click to view 👇:
+
+[![forthebadge](images/badges/solution-join-implementation.svg)](https://github.com/vipul-shinde/people-analytics-cs/tree/main/02-Join-Implementation)
+
+## 💥 Problem Solving <a name = "problem-solving"></a>
 
