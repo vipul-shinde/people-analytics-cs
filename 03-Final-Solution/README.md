@@ -1,4 +1,4 @@
-# 3. Problem Solving
+# 3. Final Solution
 
 ## 3.1 Current Employee Snapshot
 
