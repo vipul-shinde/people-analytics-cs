@@ -42,8 +42,9 @@ The following insights must be generated for the 2 dashboards requested by HR An
 
 ### 1️⃣ People Analytics Dashboard
 
+#### 1.1 Company Level Insights
 <details>
-<summary>👉 ```Company Level Insights```</summary>
+<summary>Click to View</summary>
 <br>
 
 - Total number of employees
@@ -53,8 +54,10 @@ The following insights must be generated for the 2 dashboards requested by HR An
 
 </details>
 
+#### 1.2 Department Level Insights
+
 <details>
-<summary>👉 ```Department Level Insights``` </summary>
+<summary>Click to View</summary>
 <br>
 
 - Number of employees in each department
@@ -64,8 +67,10 @@ The following insights must be generated for the 2 dashboards requested by HR An
 
 </details>
 
+#### 1.3 Title Level Insights
+
 <details>
-<summary>👉 ```Title Level Insights```</summary>
+<summary>Click to View</summary>
 <br>
 
 - Number of employees with each title
@@ -88,8 +93,10 @@ The People Analytics dashboard that we need to power data to is shown as below:
 
 ### 2️⃣ Employee Deep Dive
 
+#### 2.1 Individual Employee Deep Dive
+
 <details>
-<summary>👉 ```Individual Employee Deep Dive```</summary>
+<summary>Click to view</summary>
 <br>
 
 - See all the various employment history ordered by effective date including salary, department, manager and title changes
