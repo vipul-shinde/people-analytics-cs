@@ -84,7 +84,7 @@ The following insights must be generated for the 2 dashboards requested by HR An
 The People Analytics dashboard that we need to power data to is shown as below: 
 
 <p align="center">
-    <img src="images\current_employee_analysis.png" alt="people-analytics-dashboard" width="500px">
+    <img src="images\current_employee_analysis.png" alt="people-analytics-dashboard" width="400px">
 </p>
 
 <p align="center"> <u>Source: <a href="https://www.datawithdanny.com/">Serious SQL</a></u>
@@ -109,10 +109,24 @@ The People Analytics dashboard that we need to power data to is shown as below:
 The Deep Dive data dashboard is shown as below:
 
 <p align="center">
-    <img src="images\employee_deep_dive.png" alt="deep-dive-dashboard" width="500px">
+    <img src="images\employee_deep_dive.png" alt="deep-dive-dashboard" width="400px">
 </p>
 
 <p align="center"> <u>Source: <a href="https://www.datawithdanny.com/">Serious SQL</a></u>
     <br> 
 </p>
+
+## 📊 Data Exploration <a name = "data-exploration"></a>
+
+We start by doing the data exploration. There are 6 tables in total viz. ```employee```, ```title```, ```salary```, ```department```, ```department_employee``` & ```department_manager```. The ERD diagram of the same is as follows.
+
+<p align="center">
+    <img src="images\erd.png" alt="erd">
+</p>
+
+<p align="center"> <u>Source: <a href="www.datawithdanny.com">Serious SQL</a></u>
+    <br> 
+</p>
+
+[![forthebadge](images/badges/solution-data-exploration.svg)](https://github.com/vipul-shinde/people-analytics-cs/tree/main/01-Data-Exploration)
 
